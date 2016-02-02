@@ -1,14 +1,14 @@
 import "babel-polyfill";
 
-import {Cluster, GuidGenerator, FrameworkProvider, Configuration} from 'microphone-core';
-import ConsulProvider from 'microphone-consul';
-import {ExpressProvider} from 'microphone-express';
+import {Cluster, GuidGenerator, FrameworkProvider, Configuration,RandomProvider} from 'microphone-core';
+import {ConsulProvider, ConsulRestClient} from 'microphone-consul';
+import ExpressProvider from 'microphone-express';
 
 import express from 'express'
 import CustomersController from './customers'
 import Logger from './logger'
 
-async function main() {
+async function init() {
     try {
         let server = express();
         let customers = new CustomersController();
@@ -17,10 +17,11 @@ async function main() {
         let logger = new Logger();
         let configuration = new Configuration();
 
-        let clusterProvider = new ConsulProvider(null, logger);
+        let clusterProvider = new ConsulProvider(new ConsulRestClient(), logger);
         let frameworkProvider = new ExpressProvider(configuration, logger);
         let guidGenerator = new GuidGenerator();
-        let cluster = new Cluster(clusterProvider, frameworkProvider, guidGenerator);
+        let randomProvider = new RandomProvider();
+        let cluster = new Cluster(clusterProvider, frameworkProvider, guidGenerator, randomProvider);
 
         await cluster.bootstrap(server, "customers", "v1");
         console.log("STARTED");
@@ -29,4 +30,4 @@ async function main() {
     }
 }
 
-main();
+init();
