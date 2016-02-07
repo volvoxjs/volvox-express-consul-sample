@@ -45,7 +45,7 @@ import {Cluster, GuidGenerator, FrameworkProvider, Configuration,RandomProvider}
 import {ConsulProvider, ConsulRestClient} from 'microphone-consul';
 
 import Logger from './logger'
-import request from 'request';
+import request from 'request-promise';
 
 async function init() {
     try {
@@ -56,10 +56,8 @@ async function init() {
         await cluster.bootstrapClient();
         let instance = await cluster.findServiceInstanceAsync("customers");
 
-        request({type: 'GET', url: `http://${instance.address}:${instance.port}/customers`}, (error, response, body)=> {
-            console.log(body);
-        });
-
+        let body = await request(`http://${instance.address}:${instance.port}/customers`);
+        console.log(body);
     } catch (error) {
         console.error(error);
     }

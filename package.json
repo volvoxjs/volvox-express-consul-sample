@@ -28,6 +28,7 @@
     "microphone-consul": "^1.1.0",
     "microphone-core": "^1.1.0",
     "microphone-express": "^1.1.0",
-    "request": "^2.69.0"
+    "request": "^2.69.0",
+    "request-promise": "^2.0.0"
   }
 }
