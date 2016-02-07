@@ -37,7 +37,7 @@ init();
 ```
 
 
-**Client**
+**Call service instance from client**
 ```js
 import "babel-polyfill";
 
