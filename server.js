@@ -15,13 +15,9 @@ async function init() {
         server.get('/customers', customers.index);
 
         let logger = new Logger();
-        let configuration = new Configuration();
-
         let clusterProvider = new ConsulProvider(new ConsulRestClient(), logger);
-        let frameworkProvider = new ExpressProvider(configuration, logger);
-        let guidGenerator = new GuidGenerator();
-        let randomProvider = new RandomProvider();
-        let cluster = new Cluster(clusterProvider, frameworkProvider, guidGenerator, randomProvider);
+        let frameworkProvider = new ExpressProvider(new Configuration(), logger);
+        let cluster = new Cluster(clusterProvider, frameworkProvider, new GuidGenerator(), new RandomProvider());
 
         await cluster.bootstrap(server, "customers", "v1");
         console.log("STARTED");
