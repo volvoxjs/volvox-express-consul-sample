@@ -5,7 +5,7 @@ volvox.js express and consul sample
 
 **Server**
 ```js
-import {Volvox} from 'volvox-core';
+import Volvox from 'volvox-core';
 import vconsul from 'volvox-consul';
 import vexpress from 'volvox-express';
 
