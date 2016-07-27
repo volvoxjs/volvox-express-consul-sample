@@ -1,7 +1,7 @@
 import "babel-polyfill";
 
-import {Cluster, GuidGenerator, FrameworkProvider, Configuration,RandomProvider} from 'microphone-core';
-import {ConsulProvider, ConsulRestClient} from 'microphone-consul';
+import {Volvox} from 'volvox-core';
+import vconsul from 'volvox-consul';
 
 import Logger from './logger'
 import request from 'request-promise';
