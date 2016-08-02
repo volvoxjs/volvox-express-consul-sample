@@ -30,5 +30,20 @@ main();
 
 **Call service instance from client**
 ```js
-//TODO
+import Volvox from 'volvox-core';
+import vconsul from 'volvox-consul';
+import request from 'request-promise';
+
+async function main() {
+    let volvox = new Volvox(vconsul());
+    await volvox.bootstrapClient();
+    
+    let instance = await volvox.findServiceInstanceAsync("customers");
+    let body = await request(`http://${instance.address}:${instance.port}/customers`);
+    console.log(body);
+}
+
+main();
 ```
+
+_Stay tuned, more coming soon!_
