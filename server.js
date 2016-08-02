@@ -14,7 +14,6 @@ async function main() {
         });
     });
     let volvox = new Volvox(vconsul(), vexpress());
-
     await volvox.bootstrap(server, "customers", "v1");
 }
 
