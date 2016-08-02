@@ -2,8 +2,6 @@ import "babel-polyfill";
 
 import Volvox from 'volvox-core';
 import vconsul from 'volvox-consul';
-
-import Logger from './logger'
 import request from 'request-promise';
 
 async function init() {
